@@ -23,7 +23,7 @@ export function modifyObjcAppDelegate(contents: string): string {
     contents = contents.replace(
       /self\.moduleRegistryAdapter = \[\[UMModuleRegistryAdapter alloc\]/g,
       `${methodInvocationBlock}
-self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc]`
+  self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc]`
     );
   }
 
