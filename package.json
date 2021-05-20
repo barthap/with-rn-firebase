@@ -1,14 +1,14 @@
 {
   "name": "with-rn-firebase",
-  "version": "0.1.0",
-  "description": "An Expo config plugin for painless setup of react-native-firebase",
+  "version": "0.0.1",
+  "description": "An Expo config plugin for painless setup of `react-native-firebase`",
   "repository": "https://github.com/barthap/with-rn-firebase",
   "author": "Bartłomiej Klocek <bartlomiej.klocek@swmansion.com> (https://github.com/barthap)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/barthap/react-native-mlkit/issues"
+    "url": "https://github.com/barthap/with-rn-firebase/issues"
   },
-  "homepage": "https://github.com/barthap/react-native-mlkit#readme",
+  "homepage": "https://github.com/barthap/with-rn-firebase#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -31,7 +31,6 @@
     "@types/jest": "^26.0.23",
     "eslint": "^7.26.0",
     "expo-module-scripts": "^2.0.0",
-    "prettier": "^2.3.0",
-    "xcode": "^3.0.1"
+    "prettier": "^2.3.0"
   }
 }

@@ -1,4 +1,4 @@
-# with-rn-firebase
+# Expo with-`react-native-firebase`
 
 An [Expo config plugin](https://docs.expo.io/guides/config-plugins) for paineless setup of [`react-native-firebase`](https://rnfirebase.io/), without touching any native code!
 
@@ -9,7 +9,7 @@ You can learn more about it here:
 
 ## Installation
 
-#### Prerequisties:
+#### Prerequisites:
 
 - Installed `expo-cli@4.4.4` or newer.
 - Installed `react-native-firebase` JavaScript libraries:
@@ -74,7 +74,11 @@ Now you can either:
 
 ## Contributing
 
-Contributions are very welcome!
+Contributions are very welcome! The package uses `expo-module-scripts` for most tasks. You can find detailed information [at this link](https://github.com/expo/expo/tree/master/packages/expo-module-scripts#-config-plugin).
+
+## Credits
+
+- _Expo_
 
 ## License
 
