@@ -1,0 +1,6 @@
+{
+  "extends": "expo-module-scripts/tsconfig.plugin",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
