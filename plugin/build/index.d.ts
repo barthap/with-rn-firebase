@@ -1,4 +1,5 @@
 import { ConfigPlugin } from "@expo/config-plugins";
+import { AndroidProps } from "./android/props";
 interface PluginProps {
     /**
      * Custom location of `google-services.json`,
@@ -10,6 +11,7 @@ interface PluginProps {
      * relative to project root
      */
     iosGoogleServicesPath?: string;
+    androidOptions?: AndroidProps;
 }
 declare let plugin: ConfigPlugin<PluginProps>;
 export default plugin;

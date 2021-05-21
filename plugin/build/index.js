@@ -8,7 +8,7 @@ const DEFAULT_IOS_GOOGLE_SERVICES_PATH = "firebase/GoogleService-Info.plist";
 /**
  * A config plugin for configuring `react-native-firebase`
  */
-const withRnFirebase = (config, { androidGoogleServicesPath, iosGoogleServicesPath } = {}) => {
+const withRnFirebase = (config, { androidGoogleServicesPath, iosGoogleServicesPath, androidOptions = {} } = {}) => {
     var _a, _b;
     const resolvedAndroidServicesPath = androidGoogleServicesPath ||
         ((_a = config.android) === null || _a === void 0 ? void 0 : _a.googleServicesFile) ||
@@ -26,8 +26,8 @@ const withRnFirebase = (config, { androidGoogleServicesPath, iosGoogleServicesPa
             },
         ],
         // Android
-        android_1.withBuildscriptDependency,
-        android_1.withApplyGoogleServicesPlugin,
+        [android_1.withBuildscriptDependency, androidOptions],
+        [android_1.withApplyGoogleServicesPlugin, androidOptions],
         [
             android_1.withCopyAndroidGoogleServices,
             {

@@ -4,15 +4,22 @@ import {
   withAppBuildGradle,
 } from "@expo/config-plugins";
 
-import { googleServicesPlugin } from "./constants";
+import { googleServicesPlugin, perfMonitoringPlugin } from "./constants";
+import { AndroidProps } from "./props";
 
 /**
  * Update `app/build.gradle` by applying google-services plugin
  */
-export const withApplyGoogleServicesPlugin: ConfigPlugin = (config) => {
+export const withApplyGoogleServicesPlugin: ConfigPlugin<AndroidProps> = (
+  config,
+  { installPerfMonitoring }
+) => {
   return withAppBuildGradle(config, (config) => {
     if (config.modResults.language === "groovy") {
-      config.modResults.contents = applyPlugin(config.modResults.contents);
+      config.modResults.contents = applyPlugin(
+        config.modResults.contents,
+        installPerfMonitoring ?? false
+      );
     } else {
       WarningAggregator.addWarningAndroid(
         "android-google-services",
@@ -23,15 +30,26 @@ export const withApplyGoogleServicesPlugin: ConfigPlugin = (config) => {
   });
 };
 
-export function applyPlugin(appBuildGradle: string) {
+export function applyPlugin(
+  appBuildGradle: string,
+  installPerfMonitoring: boolean
+) {
+  let newBuildGradle = appBuildGradle;
+
   // Make sure the project does not have the plugin already
   const pattern = new RegExp(
     `apply\\s+plugin:\\s+['"]${googleServicesPlugin}['"]`
   );
-  if (appBuildGradle.match(pattern)) {
-    return appBuildGradle;
+  if (!newBuildGradle.match(pattern)) {
+    newBuildGradle += `\napply plugin: '${googleServicesPlugin}'`;
   }
 
-  // Add it to the end of the file
-  return appBuildGradle + `\napply plugin: '${googleServicesPlugin}'`;
+  const perfPattern = new RegExp(
+    `apply\\s+plugin:\\s+['"]${perfMonitoringPlugin}['"]`
+  );
+  if (installPerfMonitoring && !newBuildGradle.match(perfPattern)) {
+    newBuildGradle += `\napply plugin: '${perfMonitoringPlugin}'`;
+  }
+
+  return newBuildGradle;
 }

@@ -9,6 +9,7 @@ import {
   withBuildscriptDependency,
   withCopyAndroidGoogleServices,
 } from "./android";
+import { AndroidProps } from "./android/props";
 import { withFirebaseAppDelegate, withIosGoogleServicesFile } from "./ios";
 
 const DEFAULT_ANDROID_GOOGLE_SERVICES_PATH = "firebase/google-services.json";
@@ -25,6 +26,8 @@ interface PluginProps {
    * relative to project root
    */
   iosGoogleServicesPath?: string;
+
+  androidOptions?: AndroidProps;
 }
 
 /**
@@ -32,7 +35,7 @@ interface PluginProps {
  */
 const withRnFirebase: ConfigPlugin<PluginProps> = (
   config,
-  { androidGoogleServicesPath, iosGoogleServicesPath } = {}
+  { androidGoogleServicesPath, iosGoogleServicesPath, androidOptions = {} } = {}
 ) => {
   const resolvedAndroidServicesPath =
     androidGoogleServicesPath ||
@@ -54,8 +57,8 @@ const withRnFirebase: ConfigPlugin<PluginProps> = (
       },
     ],
     // Android
-    withBuildscriptDependency,
-    withApplyGoogleServicesPlugin,
+    [withBuildscriptDependency, androidOptions],
+    [withApplyGoogleServicesPlugin, androidOptions],
     [
       withCopyAndroidGoogleServices,
       {
