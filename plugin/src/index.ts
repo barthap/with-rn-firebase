@@ -44,6 +44,8 @@ const withRnFirebase: ConfigPlugin<PluginProps> = (
     config.ios?.googleServicesFile ||
     DEFAULT_IOS_GOOGLE_SERVICES_PATH;
 
+  // a test comment to fail CI
+
   return withPlugins(config, [
     // iOS
     withFirebaseAppDelegate,

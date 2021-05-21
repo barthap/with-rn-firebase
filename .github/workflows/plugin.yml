@@ -34,11 +34,15 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('docs/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn install --frozen-lockfile
-      - name: Build plugin
-        run: yarn rebuild
+      - name: Yarn install and build
+        run: yarn install --frozen-lockfile
       - name: Check if source is built
-        run: "[[ -z $(git status --porcelain ./plugin/build) ]] || exit 1"
+        run: |
+          if [[ ! -z $(git status --porcelain ./plugin/build) ]]
+          then
+            echo "Please run 'yarn build' or 'yarn rebuild' and commit changes to './plugin/build' directory"
+            exit 1
+          fi
       - name: Lint
         run: yarn lint --max-warnings 0
       - name: Run tests
