@@ -47,17 +47,21 @@ const withRnFirebase: ConfigPlugin<PluginProps> = (
   return withPlugins(config, [
     // iOS
     withFirebaseAppDelegate,
-    (config) =>
-      withIosGoogleServicesFile(config, {
+    [
+      withIosGoogleServicesFile,
+      {
         relativePath: resolvedIosServicePath,
-      }),
+      },
+    ],
     // Android
     withBuildscriptDependency,
     withApplyGoogleServicesPlugin,
-    (config) =>
-      withCopyAndroidGoogleServices(config, {
+    [
+      withCopyAndroidGoogleServices,
+      {
         relativePath: resolvedAndroidServicesPath,
-      }),
+      },
+    ],
   ]);
 };
 
