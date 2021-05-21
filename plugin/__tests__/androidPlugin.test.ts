@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { applyPlugin } from "../android/applyPlugin";
-import { setBuildscriptDependency } from "../android/buildscriptDependency";
+import { applyPlugin } from "../src/android/applyPlugin";
+import { setBuildscriptDependency } from "../src/android/buildscriptDependency";
 
 describe("Android Tests", () => {
   it("tests project build.gradle changes", async () => {

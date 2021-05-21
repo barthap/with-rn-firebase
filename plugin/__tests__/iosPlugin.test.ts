@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { modifyObjcAppDelegate } from "../ios/appDelegate";
+import { modifyObjcAppDelegate } from "../src/ios/appDelegate";
 
 describe("iOS Tests", () => {
   it("tests changes made to AppDelegate.m", async () => {

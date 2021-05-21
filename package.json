@@ -21,6 +21,7 @@
   "scripts": {
     "build": "expo-module build plugin",
     "clean": "expo-module clean plugin",
+    "rebuild": "yarn clean && EXPO_NONINTERACTIVE=1 yarn build",
     "lint": "expo-module lint plugin",
     "test": "expo-module test plugin",
     "prepare": "expo-module prepare",
