@@ -61,13 +61,38 @@ The plugin needs to know location of your app's [Google Services files](https://
 }
 ```
 
-The plugin also can resolve them from traditional Expo config values [`expo.{android,ios}.googleServicesFile`](https://docs.expo.io/versions/v41.0.0/config/app/#googleservicesfile).
-
 > The paths should be relative to your project root.
+
+The plugin can also resolve them from traditional Expo config values [`expo.[ios|android].googleServicesFile`](https://docs.expo.io/versions/v41.0.0/config/app/#googleservicesfile). Be aware that these values are also used by built-in Expo plugins, which shouldn't, but in extreme cases may interfere with this plugin.
+
+### Other configuration options
+
+<details>
+<summary>Install Performance Monitoring for Android</summary>
+
+In order to install [Performance Monitoring](https://rnfirebase.io/perf/usage) on Android, set `androidOptions.installPerfMonitoring` to `true`:
+
+```json
+{
+  "plugins": [
+    [
+      "with-rn-firebase",
+      {
+        //...
+        "androidOptions": {
+          "installPerfMonitoring": true
+        }
+      }
+    ]
+  ]
+}
+```
+
+</details>
 
 ## Building and running
 
-Now you can either:
+You can either:
 
 - use `expo prebuild` and `expo run:android`/`expo run:ios` to update your native projects,
 - use _[EAS Build](https://docs.expo.io/build/introduction/)_ to build your development client.

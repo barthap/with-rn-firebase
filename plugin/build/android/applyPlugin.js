@@ -6,10 +6,10 @@ const constants_1 = require("./constants");
 /**
  * Update `app/build.gradle` by applying google-services plugin
  */
-const withApplyGoogleServicesPlugin = (config) => {
+const withApplyGoogleServicesPlugin = (config, { installPerfMonitoring }) => {
     return config_plugins_1.withAppBuildGradle(config, (config) => {
         if (config.modResults.language === "groovy") {
-            config.modResults.contents = applyPlugin(config.modResults.contents);
+            config.modResults.contents = applyPlugin(config.modResults.contents, installPerfMonitoring !== null && installPerfMonitoring !== void 0 ? installPerfMonitoring : false);
         }
         else {
             config_plugins_1.WarningAggregator.addWarningAndroid("android-google-services", `Cannot automatically configure app build.gradle if it's not groovy`);
@@ -18,13 +18,17 @@ const withApplyGoogleServicesPlugin = (config) => {
     });
 };
 exports.withApplyGoogleServicesPlugin = withApplyGoogleServicesPlugin;
-function applyPlugin(appBuildGradle) {
+function applyPlugin(appBuildGradle, installPerfMonitoring) {
+    let newBuildGradle = appBuildGradle;
     // Make sure the project does not have the plugin already
     const pattern = new RegExp(`apply\\s+plugin:\\s+['"]${constants_1.googleServicesPlugin}['"]`);
-    if (appBuildGradle.match(pattern)) {
-        return appBuildGradle;
+    if (!newBuildGradle.match(pattern)) {
+        newBuildGradle += `\napply plugin: '${constants_1.googleServicesPlugin}'`;
     }
-    // Add it to the end of the file
-    return appBuildGradle + `\napply plugin: '${constants_1.googleServicesPlugin}'`;
+    const perfPattern = new RegExp(`apply\\s+plugin:\\s+['"]${constants_1.perfMonitoringPlugin}['"]`);
+    if (installPerfMonitoring && !newBuildGradle.match(perfPattern)) {
+        newBuildGradle += `\napply plugin: '${constants_1.perfMonitoringPlugin}'`;
+    }
+    return newBuildGradle;
 }
 exports.applyPlugin = applyPlugin;
