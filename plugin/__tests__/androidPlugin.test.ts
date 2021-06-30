@@ -21,22 +21,32 @@ describe("Android Tests", () => {
   });
 
   it("applies changes to project build.gradle", async () => {
-    const result = setBuildscriptDependency(projectBuildGradle, false);
+    const result = setBuildscriptDependency(projectBuildGradle, false, false);
     expect(result).toMatchSnapshot();
   });
 
   it("applies changes to app/build.gradle", async () => {
-    const result = applyPlugin(appBuildGradle, false);
+    const result = applyPlugin(appBuildGradle, false, false);
     expect(result).toMatchSnapshot();
   });
 
   it("applies perf monitoring classpath to project build.gradle", async () => {
-    const result = setBuildscriptDependency(projectBuildGradle, true);
+    const result = setBuildscriptDependency(projectBuildGradle, true, false);
     expect(result).toMatchSnapshot();
   });
 
   it("applies perf monitoring plugin to app/build.gradle", async () => {
-    const result = applyPlugin(appBuildGradle, true);
+    const result = applyPlugin(appBuildGradle, true, false);
+    expect(result).toMatchSnapshot();
+  });
+
+  it("applies crashlytics classpath to project build.gradle", async () => {
+    const result = setBuildscriptDependency(projectBuildGradle, false, true);
+    expect(result).toMatchSnapshot();
+  });
+
+  it("applies crashlytics plugin to app/build.gradle", async () => {
+    const result = applyPlugin(appBuildGradle, false, true);
     expect(result).toMatchSnapshot();
   });
 });

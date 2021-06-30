@@ -91,6 +91,29 @@ In order to install [Performance Monitoring](https://rnfirebase.io/perf/usage) o
 
 </details>
 
+<details>
+<summary>Install Crashlytics for Android</summary>
+
+In order to install [Crashlytics](https://rnfirebase.io/crashlytics/usage) on Android, set `androidOptions.installCrashlytics` to `true`:
+
+```json
+{
+  "plugins": [
+    [
+      "with-rn-firebase",
+      {
+        ...
+        "androidOptions": {
+          "installCrashlytics": true
+        }
+      }
+    ]
+  ]
+}
+```
+
+</details>
+
 ## Building and running
 
 You can either:
