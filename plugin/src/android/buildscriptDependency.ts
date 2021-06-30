@@ -5,6 +5,8 @@ import {
 } from "@expo/config-plugins";
 
 import {
+  crashlyticsClassPath,
+  crashlyticsVersion,
   googleServicesClassPath,
   googleServicesVersion,
   perfMonitoringClassPath,
@@ -17,13 +19,14 @@ import { AndroidProps } from "./props";
  */
 export const withBuildscriptDependency: ConfigPlugin<AndroidProps> = (
   config,
-  { installPerfMonitoring }
+  { installPerfMonitoring, installCrashlytics }
 ) => {
   return withProjectBuildGradle(config, (config) => {
     if (config.modResults.language === "groovy") {
       config.modResults.contents = setBuildscriptDependency(
         config.modResults.contents,
-        installPerfMonitoring ?? false
+        installPerfMonitoring ?? false,
+        installCrashlytics ?? false
       );
     } else {
       WarningAggregator.addWarningAndroid(
@@ -37,7 +40,8 @@ export const withBuildscriptDependency: ConfigPlugin<AndroidProps> = (
 
 export function setBuildscriptDependency(
   buildGradle: string,
-  installPerfMonitoring: boolean
+  installPerfMonitoring: boolean,
+  installCrashlytics: boolean
 ) {
   let newBuildGradle = buildGradle;
   if (!newBuildGradle.includes(googleServicesClassPath)) {
@@ -58,6 +62,14 @@ export function setBuildscriptDependency(
       `dependencies {
         classpath '${perfMonitoringClassPath}:${perfMonitoringVersion}'`
     );
+
+    if (installCrashlytics && !newBuildGradle.includes(crashlyticsClassPath)) {
+      newBuildGradle = newBuildGradle.replace(
+        /dependencies\s?{/,
+        `dependencies {
+          classpath '${crashlyticsClassPath}:${crashlyticsVersion}'`
+      );
+    }
   }
 
   return newBuildGradle;

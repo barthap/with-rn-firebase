@@ -4,7 +4,11 @@ import {
   withAppBuildGradle,
 } from "@expo/config-plugins";
 
-import { googleServicesPlugin, perfMonitoringPlugin } from "./constants";
+import {
+  crashlyticsPlugin,
+  googleServicesPlugin,
+  perfMonitoringPlugin,
+} from "./constants";
 import { AndroidProps } from "./props";
 
 /**
@@ -12,13 +16,14 @@ import { AndroidProps } from "./props";
  */
 export const withApplyGoogleServicesPlugin: ConfigPlugin<AndroidProps> = (
   config,
-  { installPerfMonitoring }
+  { installPerfMonitoring, installCrashlytics }
 ) => {
   return withAppBuildGradle(config, (config) => {
     if (config.modResults.language === "groovy") {
       config.modResults.contents = applyPlugin(
         config.modResults.contents,
-        installPerfMonitoring ?? false
+        installPerfMonitoring ?? false,
+        installCrashlytics ?? false
       );
     } else {
       WarningAggregator.addWarningAndroid(
@@ -32,7 +37,8 @@ export const withApplyGoogleServicesPlugin: ConfigPlugin<AndroidProps> = (
 
 export function applyPlugin(
   appBuildGradle: string,
-  installPerfMonitoring: boolean
+  installPerfMonitoring: boolean,
+  installCrashlytics: boolean
 ) {
   let newBuildGradle = appBuildGradle;
 
@@ -42,6 +48,13 @@ export function applyPlugin(
   );
   if (!newBuildGradle.match(pattern)) {
     newBuildGradle += `\napply plugin: '${googleServicesPlugin}'`;
+  }
+
+  const crashlyticsPattern = new RegExp(
+    `apply\\s+plugin:\\s+['"]${crashlyticsPlugin}['"]`
+  );
+  if (installCrashlytics && !newBuildGradle.match(crashlyticsPattern)) {
+    newBuildGradle += `\napply plugin: '${crashlyticsPlugin}'`;
   }
 
   const perfPattern = new RegExp(
