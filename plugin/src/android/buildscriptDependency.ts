@@ -62,14 +62,14 @@ export function setBuildscriptDependency(
       `dependencies {
         classpath '${perfMonitoringClassPath}:${perfMonitoringVersion}'`
     );
+  }
 
-    if (installCrashlytics && !newBuildGradle.includes(crashlyticsClassPath)) {
-      newBuildGradle = newBuildGradle.replace(
-        /dependencies\s?{/,
-        `dependencies {
-          classpath '${crashlyticsClassPath}:${crashlyticsVersion}'`
-      );
-    }
+  if (installCrashlytics && !newBuildGradle.includes(crashlyticsClassPath)) {
+    newBuildGradle = newBuildGradle.replace(
+      /dependencies\s?{/,
+      `dependencies {
+        classpath '${crashlyticsClassPath}:${crashlyticsVersion}'`
+    );
   }
 
   return newBuildGradle;

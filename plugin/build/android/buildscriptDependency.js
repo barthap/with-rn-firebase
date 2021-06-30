@@ -6,10 +6,10 @@ const constants_1 = require("./constants");
 /**
  * Update `<project>/build.gradle` by adding google-services dependency to buildscript
  */
-const withBuildscriptDependency = (config, { installPerfMonitoring }) => {
+const withBuildscriptDependency = (config, { installPerfMonitoring, installCrashlytics }) => {
     return config_plugins_1.withProjectBuildGradle(config, (config) => {
         if (config.modResults.language === "groovy") {
-            config.modResults.contents = setBuildscriptDependency(config.modResults.contents, installPerfMonitoring !== null && installPerfMonitoring !== void 0 ? installPerfMonitoring : false);
+            config.modResults.contents = setBuildscriptDependency(config.modResults.contents, installPerfMonitoring !== null && installPerfMonitoring !== void 0 ? installPerfMonitoring : false, installCrashlytics !== null && installCrashlytics !== void 0 ? installCrashlytics : false);
         }
         else {
             config_plugins_1.WarningAggregator.addWarningAndroid("android-google-services", `Cannot automatically configure project build.gradle if it's not groovy`);
@@ -18,7 +18,7 @@ const withBuildscriptDependency = (config, { installPerfMonitoring }) => {
     });
 };
 exports.withBuildscriptDependency = withBuildscriptDependency;
-function setBuildscriptDependency(buildGradle, installPerfMonitoring) {
+function setBuildscriptDependency(buildGradle, installPerfMonitoring, installCrashlytics) {
     let newBuildGradle = buildGradle;
     if (!newBuildGradle.includes(constants_1.googleServicesClassPath)) {
         // TODO: Find a more stable solution for this
@@ -29,6 +29,10 @@ function setBuildscriptDependency(buildGradle, installPerfMonitoring) {
         !newBuildGradle.includes(constants_1.perfMonitoringClassPath)) {
         newBuildGradle = newBuildGradle.replace(/dependencies\s?{/, `dependencies {
         classpath '${constants_1.perfMonitoringClassPath}:${constants_1.perfMonitoringVersion}'`);
+    }
+    if (installCrashlytics && !newBuildGradle.includes(constants_1.crashlyticsClassPath)) {
+        newBuildGradle = newBuildGradle.replace(/dependencies\s?{/, `dependencies {
+        classpath '${constants_1.crashlyticsClassPath}:${constants_1.crashlyticsVersion}'`);
     }
     return newBuildGradle;
 }

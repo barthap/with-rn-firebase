@@ -5,3 +5,6 @@ export declare const googleServicesVersion = "4.3.8";
 export declare const perfMonitoringClassPath = "com.google.firebase:perf-plugin";
 export declare const perfMonitoringPlugin = "com.google.firebase.firebase-perf";
 export declare const perfMonitoringVersion = "1.4.0";
+export declare const crashlyticsClassPath = "com.google.firebase:firebase-crashlytics-gradle";
+export declare const crashlyticsPlugin = "com.google.firebase.crashlytics";
+export declare const crashlyticsVersion = "2.7.1";
