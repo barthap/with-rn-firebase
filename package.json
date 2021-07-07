@@ -13,11 +13,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "files": [
-    "app.config.js",
+    "app.plugin.js",
     "plugin/build"
   ],
   "private": false,
-  "main": "app.config.js",
+  "main": "app.plugin.js",
   "scripts": {
     "build": "expo-module build plugin",
     "clean": "expo-module clean plugin",
