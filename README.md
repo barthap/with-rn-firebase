@@ -12,7 +12,7 @@ You can learn more about it here:
 
 Since **React Native Firebase 12.4.0** this plugin is **deprecated** in favor of built-in plugins. [Learn more here](https://rnfirebase.io/#expo).
 
-If you're using `react-native-firebase@2.3.0` or older, you may still want to use this plugin.
+If you're using `@react-native-firebase/app@12.3.0` or older, you may still want to use this plugin.
 
 ---
 
