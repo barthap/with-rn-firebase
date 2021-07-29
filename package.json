@@ -1,6 +1,6 @@
 {
   "name": "with-rn-firebase",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "An Expo config plugin for painless setup of `react-native-firebase`",
   "repository": "https://github.com/barthap/with-rn-firebase",
   "author": "Bartłomiej Klocek <bartlomiej.klocek@swmansion.com> (https://github.com/barthap)",
