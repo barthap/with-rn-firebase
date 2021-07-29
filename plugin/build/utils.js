@@ -18,9 +18,10 @@ const withCopyFile = (config, { platform, from, to }) => config_plugins_1.withDa
     },
 ]);
 exports.withCopyFile = withCopyFile;
-function warnBothPlatforms(text, link) {
+function warnBothPlatforms(text, link, androidOnly = false) {
     config_plugins_1.WarningAggregator.addWarningAndroid("with-rn-firebase", text, link);
-    config_plugins_1.WarningAggregator.addWarningIOS("with-rn-firebase", text, link);
+    if (!androidOnly)
+        config_plugins_1.WarningAggregator.addWarningIOS("with-rn-firebase", text, link);
     // WarningAggregator seem not to work in custom plugins, a workaround
     const linkText = link ? `Learn more: ${link}` : "";
     console.warn(chalk_1.default.yellow(`[with-rn-firebase] ${text} ${linkText}`));

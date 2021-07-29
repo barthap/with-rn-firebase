@@ -18,10 +18,10 @@ function displayDeprecationWarning(options) {
         if (utils_1.compareVersions(versionStr, DEPRECATE_SINCE_RNFB_VERSION) >= 0) {
             utils_1.warnBothPlatforms(`with-rn-firebase is deprecated since React Native Firebase ${DEPRECATE_SINCE_RNFB_VERSION} in favor of built-in plugins.`, "https://rnfirebase.io/#expo");
             if ((_a = options.androidOptions) === null || _a === void 0 ? void 0 : _a.installCrashlytics) {
-                utils_1.warnBothPlatforms(`installCrashlytics is deprecated in favor of built-in @react-native-firebase/crashlytics plugin`, "https://rnfirebase.io/#expo");
+                utils_1.warnBothPlatforms(`installCrashlytics is deprecated in favor of built-in @react-native-firebase/crashlytics plugin`, "https://rnfirebase.io/#expo", true);
             }
             if ((_b = options.androidOptions) === null || _b === void 0 ? void 0 : _b.installPerfMonitoring) {
-                utils_1.warnBothPlatforms(`installPerfMonitoring is deprecated in favor of built-in @react-native-firebase/perf plugin`, "https://rnfirebase.io/#expo");
+                utils_1.warnBothPlatforms(`installPerfMonitoring is deprecated in favor of built-in @react-native-firebase/perf plugin`, "https://rnfirebase.io/#expo", true);
             }
         }
         else {
