@@ -6,6 +6,15 @@ You can learn more about it here:
 
 - [Config Plugins - Expo docs](https://docs.expo.io/guides/config-plugins)
 - Expo Managed Workflow in 2021: [part 1](https://blog.expo.io/expo-managed-workflow-in-2021-5b887bbf7dbb), [part 2](https://blog.expo.io/expo-managed-workflow-in-2021-d1c9b68aa10)
+- [How to integrate `react-native-firebase` with Expo](https://bartlomiej-klocek.medium.com/how-to-integrate-react-native-firebase-into-expo-d34712eaf64d)
+
+# 📛 Deprecated
+
+Since **React Native Firebase 12.4.0** this plugin is **deprecated** in favor of built-in plugins. [Learn more here](https://rnfirebase.io/#expo).
+
+If you're using `react-native-firebase@2.3.0` or older, you may still want to use this plugin.
+
+---
 
 ## Installation
 
